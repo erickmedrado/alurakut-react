@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import MainGrid from '../src/components/MainGrid';
 import Box from '../src/components/Box';
-import { AlurakutMenu } from '../src/lib/AlurakutCommons';
+import { AlurakutMenu, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
+import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations';
 
 function ProfileSidebar(prop) {
     return (
@@ -13,22 +14,48 @@ function ProfileSidebar(prop) {
 
 export default function Home() {
     const userName = 'erickmedrado';
+    const listUsers = [
+        'juunegreiros',
+        'omariosouto',
+        'peas',
+        'rafaballerini',
+        'marcobrunodev',
+        'felipefialho',
+    ];
     return (
         <>
             <AlurakutMenu />
             <MainGrid>
-                <div clasName="profileArea" style={{ gridArea: 'profileArea'}}>
+                <div className="profileArea" style={{ gridArea: 'profileArea'}}>
                     <ProfileSidebar githubUser={userName} />
                 </div>
                 <div className="welcomeArea" style={{ gridArea: 'welcomeArea'}}>
                     <Box >
-                        Bem Vindo
+                        <h1 className="title">
+                            Bem Vindo(a)
+                        </h1>
+
+                        <OrkutNostalgicIconSet/>
                     </Box>
                 </div>
                 <div className="relationsArea" style={{ gridArea: 'relationsArea'}}>
-                    <Box>
-                        Pessoas da Comunidade
-                    </Box>
+                    <ProfileRelationsBoxWrapper>
+                        <h2 className="smallTitle">
+                            Pessoas da comunidade ({listUsers.length})
+                        </h2>
+                        <ul>
+                            {listUsers.map((itemAtual) => {
+                                return (
+                                    <li>
+                                        <a href={`/users/${itemAtual}`} key={itemAtual}>
+                                            <img src={`https://github.com/${itemAtual}.png`} />
+                                            <span>{itemAtual}</span>
+                                        </a>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </ProfileRelationsBoxWrapper>
                     <Box>
                         Comunidade
                     </Box>
